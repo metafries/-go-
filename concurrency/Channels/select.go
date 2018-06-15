@@ -29,6 +29,6 @@ func main() {
 	case sc := <-c2:
 		fmt.Println(game, " has a security clearance of ", sc, " found in server 2")
 	case <-time.After(2 * time.Minute):
-		fmt.Println("Too slow!")
+		fmt.Println("Timeout!")
 	}
 }
