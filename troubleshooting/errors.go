@@ -35,6 +35,7 @@ func (e findError) Error() string {
 func findSC(game, server string) (int, error) {
 	time.Sleep(time.Duration(rand.Intn(15)) * time.Second) // Simulate seraching
 	if v, ok := scMapping[game]; !ok {
+		// panic("Crew member not found")
 		return -1, findError{
 			game,
 			server,
@@ -47,7 +48,12 @@ func findSC(game, server string) (int, error) {
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
-	if clearance, err := findSC("BRA-SUI", "server 1"); err != nil {
+	/* 	defer func() {
+	   		if err := recover(); err != nil {
+	   			fmt.Println("A panic recovered", err)
+	   		}
+	   	}()
+	*/if clearance, err := findSC("BRA-SUI", "server 1"); err != nil {
 		if v, ok := err.(findError); ok {
 			fmt.Println(
 				"Error Occured: [Type]", ErrCrewNotFound,
