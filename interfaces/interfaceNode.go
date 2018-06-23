@@ -79,6 +79,10 @@ func main() {
 		fmt.Println("Type is PowerNode, message: ", concreten.PNodeMessage)
 	}
 
+	/* 	If *T implements methods of interface I,
+	   	then only a value of type *T can access the methods.
+	*/sNode := &SLLNode{}
+	n = sNode
 }
 
 func createNode(v int) Node {
