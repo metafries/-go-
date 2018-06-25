@@ -50,22 +50,22 @@ type PowerNode struct {
 }
 
 // SetValue : func(v int) error
-func (pNode *PowerNode) SetValue(v int) error {
-	if pNode == nil {
-		return ErrInvalidNode
-	}
-	pNode.value = v * 10
+func (pNode PowerNode) SetValue(v int) error {
+	/* 	if pNode == nil {
+	   		return ErrInvalidNode
+	   	}
+	*/pNode.value = v * 10
 	return nil
 }
 
 // GetValue : func() int
-func (pNode *PowerNode) GetValue() int {
+func (pNode PowerNode) GetValue() int {
 	return pNode.value
 }
 
 // NewPowerNode : func() *PowerNode
-func NewPowerNode() *PowerNode {
-	return &PowerNode{
+func NewPowerNode() PowerNode {
+	return PowerNode{
 		PNodeMessage: "This is a message from the power node",
 	}
 }
@@ -75,7 +75,7 @@ func main() {
 	switch concreten := n.(type) {
 	case *SLLNode:
 		fmt.Println("Type is SLLNode, message: ", concreten.SNodeMessage)
-	case *PowerNode:
+	case PowerNode:
 		fmt.Println("Type is PowerNode, message: ", concreten.PNodeMessage)
 	}
 
@@ -83,6 +83,11 @@ func main() {
 	   	then only a value of type *T can access the methods.
 	*/sNode := &SLLNode{}
 	n = sNode
+
+	/* If T implements methods of interface I,
+	   then either type T or type *T of a value can access the methods. */
+	pNode := &PowerNode{value: 7}
+	fmt.Println(pNode.GetValue())
 }
 
 func createNode(v int) Node {
