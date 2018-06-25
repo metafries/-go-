@@ -88,6 +88,10 @@ func main() {
 	   then either type T or type *T of a value can access the methods. */
 	pNode := &PowerNode{value: 7}
 	fmt.Println(pNode.GetValue())
+
+	/* The receiver of a method is allowed to be nil */
+	var sllNode *SLLNode
+	fmt.Println(sllNode.SetValue(4))
 }
 
 func createNode(v int) Node {
