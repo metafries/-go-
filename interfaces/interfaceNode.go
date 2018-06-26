@@ -92,6 +92,9 @@ func main() {
 	/* The receiver of a method is allowed to be nil */
 	var sllNode *SLLNode
 	fmt.Println(sllNode.SetValue(4))
+	var node Node
+	node = &SLLNode{}
+	fmt.Println(node.SetValue(4))
 }
 
 func createNode(v int) Node {
