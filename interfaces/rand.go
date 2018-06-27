@@ -27,6 +27,13 @@ func (cr *customRand) GetCount() int {
 	return cr.count
 }
 
+/* If the outer type implements a method that has the same name as a method implemented by the inner type,
+   then the outer method will be given priority. */
+func (cr *customRand) Intn(n int) int {
+	cr.count++
+	return cr.Rand.Intn(n) + 1
+}
+
 func main() {
 	cr := NewCustomRand(time.Now().UnixNano())
 	fmt.Println(cr.RangeRand(5, 30))
