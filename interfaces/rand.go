@@ -39,4 +39,10 @@ func main() {
 	fmt.Println(cr.RangeRand(5, 30))
 	fmt.Println(cr.Intn(10))
 	fmt.Println(cr.GetCount())
+	/* Outer type stays as a different type than the inner type,
+	   meaning that a value of the inner type can not be assigned to the outer type or vice versa.
+	   var r *rand.Rand = cr
+	   => Error: Cannot use cr (type *customRand) as type *rand.Rand in assignment.
+	   cr = &rand.Rand
+	   => Error: Cannot use literal (type *rand.Rand) as type *customRand in assignment. */
 }
