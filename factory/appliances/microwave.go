@@ -6,11 +6,11 @@ type Microwave struct {
 }
 
 // Start : The Microwave struct implements the start() function
-type (mr *Microwave) Start() {
-	mr.typeName = " Microwave"
+func (mr *Microwave) Start() {
+	mr.typeName = " Microwave "
 }
 
 // GetPurpose : The Microwave struct implements the GetPurpose() function
-type (mr *Microwave) GetPurpose() string {
+func (mr *Microwave) GetPurpose() string {
 	return "I am a" + mr.typeName + "I heat stuff up!"
 }
