@@ -1,7 +1,7 @@
 package main
 
 import (
-	"-go-/factory/appliances"
+	"-go-/_factory/appliances"
 	"fmt"
 )
 
