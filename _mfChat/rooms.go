@@ -61,7 +61,7 @@ func (r *room) Run() {
 	logger.Println("Starting Chat Room ", r.name)
 	go func() {
 		for msg := range r.Msgch {
-			broadcastMsg(msg)
+			r.broadcastMsg(msg)
 		}
 	}()
 }
@@ -72,7 +72,7 @@ func (r *room) broadcastMsg(msg string) {
 	fmt.Println("Received message: ", msg)
 	for wc, _ := range r.clients {
 		go func(wc chan<- string) {
-			wc <- string
+			wc <- msg
 		}(wc)
 	}
 }

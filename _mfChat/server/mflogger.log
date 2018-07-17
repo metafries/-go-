@@ -1,0 +1,9 @@
+MetaFries rooms.go:61: Starting Chat Room  MFChat
+MetaFries mfChat.go:47: Received Request From Client  0x10e6500
+MetaFries mfChat.go:47: Received Request From Client  0x10e6500
+MetaFries clients.go:24: Kay: Hello this is Kay
+MetaFries clients.go:24: Sonny: Hello this is Sonny
+MetaFries clients.go:24: Kay: What's up?
+MetaFries clients.go:24: Sonny: We just beat German
+MetaFries clients.go:24: Kay: Great! I made thousands of money from it
+MetaFries clients.go:24: Sonny: Cool! It's time to celebrate

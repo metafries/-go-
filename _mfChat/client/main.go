@@ -17,13 +17,13 @@ func main() {
 	fmt.Println("What's your name?")
 	fmt.Scanln(&name)
 
-	fmt.Println("Hello %s, connecting to the MF chat system ... \n", name)
+	fmt.Printf("Hello %s, connecting to the MF chat system ... \n", name)
 	conn, err := net.Dial("tcp", "127.0.0.1:2300")
 	if err != nil {
 		log.Fatal("Could not connect to MF Chat system: ", err)
 	}
 	fmt.Println("Connected to MF Chat system")
-	name += ":"
+	name += ": "
 	defer conn.Close()
 	go func() {
 		scanner := bufio.NewScanner(conn)
