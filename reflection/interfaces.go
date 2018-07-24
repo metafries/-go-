@@ -28,4 +28,9 @@ func inspectType(obj interface{}) {
 	t := v.Type()
 	myInterface := reflect.TypeOf((*Printer)(nil)).Elem()
 	fmt.Println("==> obj implements Printer?", t.Implements(myInterface))
+	if t.Implements(myInterface) {
+		printFunc := v.MethodByName("Print")
+		args := []reflect.Value{reflect.ValueOf("::This Is Printed From A Reflection Object::")}
+		printFunc.Call(args)
+	}
 }
