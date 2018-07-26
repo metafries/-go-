@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	CONST uint8 = iota
+	CUSTOM uint8 = iota
 )
 
 var wrongTypeError error = errors.New("[error] Type must be a pointer to a struct")
