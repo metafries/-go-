@@ -15,7 +15,7 @@ var logger = _mfLogger.GetInstance()
 func Run(connection string) error {
 	l, err := net.Listen("tcp", connection)
 	if err != nil {
-		logger.Println("Error Connecting to Chat Client ", err)
+		logger.Println("Error Connecting to Chat Client:", err)
 		return err
 	}
 	r := CreateRoom("MFChat")
@@ -35,7 +35,7 @@ func Run(connection string) error {
 	for {
 		conn, err := l.Accept()
 		if err != nil {
-			logger.Println("Error Accepting Connection From Chat Client ", err)
+			logger.Println("Error Accepting Connection From Chat Client:", err)
 			break
 		}
 		go handleConnection(r, conn)
@@ -44,6 +44,6 @@ func Run(connection string) error {
 }
 
 func handleConnection(r *room, c net.Conn) {
-	logger.Println("Received Request From Client ", c.RemoteAddr)
+	logger.Println("Received Request From Client:", c.RemoteAddr)
 	r.AddClient(c)
 }

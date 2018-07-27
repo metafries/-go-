@@ -26,7 +26,7 @@ func TestRun(t *testing.T) {
 	rand.Seed(time.Now().UnixNano())
 	name := fmt.Sprintf("Anonymous%d", rand.Intn(400))
 
-	t.Logf("Hello %s, Connecting to the MF Chat System ... \n", name)
+	t.Logf("[INFO] Hello %s, Connecting to the MF Chat System ... \n", name)
 	conn, err := net.Dial("tcp", "127.0.0.1:2300")
 	if err != nil {
 		t.Fatal("[FATAL] Could not connect to MF chat system:", err)

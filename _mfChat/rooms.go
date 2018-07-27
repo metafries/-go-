@@ -58,7 +58,7 @@ func (r *room) RemoveClient(wc chan<- string) {
 }
 
 func (r *room) Run() {
-	logger.Println("Starting Chat Room ", r.name)
+	logger.Println("Starting Chat Room:", r.name)
 	go func() {
 		for msg := range r.Msgch {
 			r.broadcastMsg(msg)
