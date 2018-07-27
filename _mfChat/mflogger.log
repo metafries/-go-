@@ -1,14 +1,15 @@
 MetaFries rooms.go:61: Starting Chat Room: MFChat
-MetaFries mfChat.go:47: Received Request From Client: 0x113e860
-MetaFries clients.go:24: Anonymous211:RandomMessage 324
-MetaFries clients.go:24: Anonymous211:RandomMessage 19
-MetaFries clients.go:24: Anonymous211:RandomMessage 364
-MetaFries clients.go:24: Anonymous211:RandomMessage 332
-MetaFries clients.go:24: Anonymous211:RandomMessage 24
-MetaFries clients.go:24: Anonymous211:RandomMessage 158
-MetaFries clients.go:24: Anonymous211:RandomMessage 29
-MetaFries clients.go:24: Anonymous211:RandomMessage 300
-MetaFries clients.go:24: Anonymous211:RandomMessage 247
-MetaFries clients.go:24: Anonymous211:RandomMessage 395
-MetaFries clients.go:24: Anonymous211:RandomMessage 258
+MetaFries mfChat.go:47: Received Request From Client: 0x113ed20
+MetaFries clients.go:24: Anonymous373:RandomMessage 16
+MetaFries clients.go:24: Anonymous373:RandomMessage 125
+MetaFries clients.go:24: Anonymous373:RandomMessage 269
+MetaFries clients.go:24: Anonymous373:RandomMessage 286
+MetaFries clients.go:24: Anonymous373:RandomMessage 36
+MetaFries clients.go:24: Anonymous373:RandomMessage 28
+MetaFries clients.go:24: Anonymous373:RandomMessage 229
+MetaFries clients.go:24: Anonymous373:RandomMessage 249
+MetaFries clients.go:24: Anonymous373:RandomMessage 386
+MetaFries clients.go:24: Anonymous373:RandomMessage 337
+MetaFries clients.go:24: Anonymous373:RandomMessage 5
 MetaFries rooms.go:46: Removing client ...
+MetaFries mfChat.go:47: Received Request From Client: 0x113ed20

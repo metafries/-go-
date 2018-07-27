@@ -6,12 +6,15 @@ import (
 	"math/rand"
 	"net"
 	"strings"
+	"sync"
 	"testing"
 	"time"
 )
 
-func TestRun(t *testing.T) {
-	go func() {
+var once sync.Once
+
+func chatServerFunc(t *testing.T) func() {
+	return func() {
 		t.Log("[INFO] Starting MF Chat Server ...")
 		if err := Run(":2300"); err != nil {
 			t.Error("[ERROR] Could not start chat server:", err)
@@ -19,9 +22,18 @@ func TestRun(t *testing.T) {
 		} else {
 			t.Log("[INFO] Started MF Chat Server ...")
 		}
-	}()
+	}
+}
 
-	time.Sleep(1 * time.Second)
+func TestRun(t *testing.T) {
+	if testing.Short() {
+		t.Skip("Skipping test in short mode ...")
+	}
+	t.Log("[INFO] Testing MF Chat Send and Receive ...")
+
+	go once.Do(chatServerFunc(t))
+
+	time.Sleep(1 * time.Second) // wait for one second assuming the chat server succeeded
 
 	rand.Seed(time.Now().UnixNano())
 	name := fmt.Sprintf("Anonymous%d", rand.Intn(400))
@@ -56,4 +68,17 @@ func TestRun(t *testing.T) {
 		}
 		msgCh <- msg
 	}
+}
+
+func TestServerConnection(t *testing.T) {
+	t.Log("[INFO] Test MF Chat Receive Messages ...")
+	f := chatServerFunc(t)
+	go once.Do(f)
+	time.Sleep(1 * time.Second) // wait for one second assuming the chat server succeeded
+
+	conn, err := net.Dial("tcp", "127.0.0.1:2300")
+	if err != nil {
+		t.Fatal("[FATAL] Could not connect to MF chat system:", err)
+	}
+	conn.Close()
 }
