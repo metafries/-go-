@@ -1,0 +1,13 @@
+MetaFries rooms.go:61: Starting Chat Room  MFChat
+MetaFries mfChat.go:47: Received Request From Client  0x113e860
+MetaFries clients.go:24: Anonymous60:RandomMessage 215
+MetaFries clients.go:24: Anonymous60:RandomMessage 326
+MetaFries clients.go:24: Anonymous60:RandomMessage 48
+MetaFries clients.go:24: Anonymous60:RandomMessage 15
+MetaFries clients.go:24: Anonymous60:RandomMessage 239
+MetaFries clients.go:24: Anonymous60:RandomMessage 180
+MetaFries clients.go:24: Anonymous60:RandomMessage 386
+MetaFries clients.go:24: Anonymous60:RandomMessage 43
+MetaFries clients.go:24: Anonymous60:RandomMessage 158
+MetaFries clients.go:24: Anonymous60:RandomMessage 133
+MetaFries clients.go:24: Anonymous60:RandomMessage 216

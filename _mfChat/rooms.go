@@ -69,7 +69,7 @@ func (r *room) Run() {
 func (r *room) broadcastMsg(msg string) {
 	r.RLock()
 	defer r.RUnlock()
-	fmt.Println("Received message: ", msg)
+	fmt.Println("[INFO] Received message -", msg)
 	for wc, _ := range r.clients {
 		go func(wc chan<- string) {
 			wc <- msg
