@@ -8,14 +8,14 @@ import (
 func main() {
 
 	type CrewMember struct {
-		ID                int
-		Name              string
-		SecurityClearance int
-		AcessCodes        []string
+		ID                int      `json:"id,omitempty"`
+		Name              string   `json:"name"`
+		SecurityClearance int      `json:"clearancelevel"`
+		AccessCodes       []string `json:"accesscodes"`
 	}
 
 	cm4 := CrewMember{1, "MetaFries", 10, []string{"GIR", "TOT"}}
-	cm3 := CrewMember{Name: "Cashviar", SecurityClearance: 10, AcessCodes: []string{"NEW", "TOT"}}
+	cm3 := CrewMember{Name: "Cashviar", SecurityClearance: 20, AccessCodes: []string{"NEW", "TOT"}}
 
 	b4, err := json.Marshal(&cm4)
 	PrintError(err)
