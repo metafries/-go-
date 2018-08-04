@@ -25,6 +25,7 @@ func main() {
 	si3 := ShipInfo{1, "Fighter", cm3}
 	msk2 := map[string]int{"item1": 1, "item2": 2}
 	mik2 := map[int]string{1: "item1", 2: "item2"} // non-string map keys (Go 1.7 -)
+	scm := []CrewMember{cm4, cm3}
 
 	b4, err := json.Marshal(&cm4)
 	PrintResult(err, b4)
@@ -36,6 +37,8 @@ func main() {
 	PrintResult(err, bmsk2)
 	bmik2, err := json.Marshal(&mik2)
 	PrintResult(err, bmik2)
+	bscm, err := json.Marshal(&scm)
+	PrintResult(err, bscm)
 
 }
 
