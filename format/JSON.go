@@ -41,9 +41,20 @@ func main() {
 	PrintResult(err, bscm)
 
 	sbyte := []byte(bsi3)
+	mbyte := []byte(bmik2)
+	dbyte := []byte(bscm)
+
 	si := new(ShipInfo)
+	m := make(map[int]string)
+	s := []CrewMember{}
+
 	json.Unmarshal(sbyte, si)
+	json.Unmarshal(mbyte, &m)
+	json.Unmarshal(dbyte, &s)
+
 	fmt.Println(si.ShipID, si.ShipClass, si.Captain.Name)
+	fmt.Println(m)
+	fmt.Println(s)
 
 }
 
