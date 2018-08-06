@@ -40,6 +40,11 @@ func main() {
 	bscm, err := json.Marshal(&scm)
 	PrintResult(err, bscm)
 
+	sbyte := []byte(bsi3)
+	si := new(ShipInfo)
+	json.Unmarshal(sbyte, si)
+	fmt.Println(si.ShipID, si.ShipClass, si.Captain.Name)
+
 }
 
 func PrintResult(err error, b []byte) {
