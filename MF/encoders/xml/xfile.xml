@@ -1,0 +1,12 @@
+ <ship>
+ 	<ShipInfo>
+ 		<ShipID>1</ShipID>
+ 		<ShipClass>Fighter</ShipClass>
+ 	</ShipInfo>
+ 	<member name="Cashviar" clearance="20">
+ 		<codes>
+ 			<code>NEW</code>
+ 			<code>TOT</code>
+ 		</codes>
+ 	</member>
+ </ship>
