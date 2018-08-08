@@ -30,6 +30,25 @@ func main() {
 	bslices, err := xml.Marshal(slices)
 	PrintResult(err, bslices)
 
+	data := []byte(` 
+	<SHIPINFO>
+		<ShipDetails>
+			<ShipID>1</ShipID>
+			<ShipClass>Fighter</ShipClass>
+		</ShipDetails>
+		<Captain name="Cashviar">
+			<id>0</id>
+			<clearancelevel>20</clearancelevel>
+			<accesscodes>
+				<code>NEW</code>
+				<code>TOT</code>
+			</accesscodes>
+		</Captain>
+	</SHIPINFO>`)
+	si := ShipInfo{}
+	xml.Unmarshal(data, &si)
+	fmt.Println(si)
+
 }
 
 func PrintResult(err error, b []byte) {
