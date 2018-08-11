@@ -11,7 +11,7 @@ import (
 
 func main() {
 
-	file, err := os.Open("cfile.csv")
+	file, err := os.Open("cfiler.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
