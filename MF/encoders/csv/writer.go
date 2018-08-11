@@ -22,13 +22,14 @@ func main() {
 
 	w := csv.NewWriter(file)
 	w.Comma = ';'
+	w.WriteAll(records)
 
-	for _, record := range records {
-		if err := w.Write(record); err != nil {
-			log.Fatal(err)
-		}
-	}
-	w.Flush()
+	// for _, record := range records {
+	// 	if err := w.Write(record); err != nil {
+	// 		log.Fatal(err)
+	// 	}
+	// }
+	// w.Flush()
 
 	err = w.Error()
 	if err != nil {
