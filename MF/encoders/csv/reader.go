@@ -19,7 +19,7 @@ func main() {
 
 	r := csv.NewReader(file)
 	r.Comment = '#'
-	// r.Comma = ';'
+	r.Comma = ';'
 
 	// records, err := r.ReadAll()
 	// if err != nil {
@@ -33,6 +33,14 @@ func main() {
 			break
 		}
 		if err != nil {
+			if pe, ok := err.(*csv.ParseError); ok {
+				fmt.Println("\n    Bad Line:          ", pe.Line)
+				fmt.Println("    Bad Column:        ", pe.Column)
+				fmt.Println("    Error Reported:    ", pe.Err, "\n")
+				if pe.Err == csv.ErrFieldCount {
+					continue
+				}
+			}
 			log.Fatal(err)
 		}
 		fmt.Println("    CSV Row", record)
