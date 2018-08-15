@@ -29,6 +29,8 @@ func main() {
 
 	clubs := GetClubByLeagues(db, []string{"'Premier League'"})
 	fmt.Println("    Club Table Data : ", clubs)
+
+	fmt.Println("    Club ID = 1:      ", GetClubInfoById(db, 1))
 }
 
 func GetClubByLeagues(db *sql.DB, leagues []string) Club {
@@ -58,4 +60,15 @@ func GetClubByLeagues(db *sql.DB, leagues []string) Club {
 		log.Fatal("[FATAL] -> ", err)
 	}
 	return retVal
+}
+
+func GetClubInfoById(db *sql.DB, id int) (ci clubInfo) {
+
+	row := db.QueryRow("SELECT * FROM Club WHERE id = ?", id)
+
+	err := row.Scan(&ci.id, &ci.name, &ci.ranking, &ci.stadium, &ci.league)
+	if err != nil {
+		log.Fatal("[FATAL] -> ", err)
+	}
+	return
 }
