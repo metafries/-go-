@@ -21,7 +21,7 @@ type Club []clubInfo
 
 func main() {
 
-	db, err := sql.Open("mysql", "root:<password>@/MF?parseTime=true")
+	db, err := sql.Open("mysql", "root:KLin#180812@/MF?parseTime=true")
 	if err != nil {
 		log.Fatal("[FATAL] Could not connect, error -> ", err.Error())
 	}
@@ -31,6 +31,9 @@ func main() {
 	fmt.Println("    Club Table Data : ", clubs)
 
 	fmt.Println("    Club ID = 1:      ", GetClubInfoById(db, 1))
+
+	AddClubInfo(db, clubInfo{name: "Juventus", ranking: 1, league: "Lega Serie A"})
+
 }
 
 func GetClubByLeagues(db *sql.DB, leagues []string) Club {
@@ -71,4 +74,20 @@ func GetClubInfoById(db *sql.DB, id int) (ci clubInfo) {
 		log.Fatal("[FATAL] -> ", err)
 	}
 	return
+}
+
+func AddClubInfo(db *sql.DB, ci clubInfo) int64 {
+
+	resp, err := db.Exec(
+		"INSERT INTO Club (name, ranking, league) VALUES (?, ?, ?)",
+		ci.name, ci.ranking, ci.league)
+	if err != nil {
+		log.Fatal("[FATAL] -> ", err)
+	}
+	ra, _ := resp.RowsAffected()
+	id, _ := resp.LastInsertId()
+
+	log.Println("[INFO] -> Rows Affected:", ra, ", Last Insert Id:", id)
+	return id
+
 }
