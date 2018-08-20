@@ -63,4 +63,10 @@ func main() {
 		log.Fatal("[FATAL] mgo - [Collection.Find.Select.All]: ", err)
 	}
 	log.Println("[INFO] mgo - [Collection.Find.Select.All]: Query Results(names):", names)
+
+	// Insert
+	newcl := clubInfo{ID: 2, Name: "Juventus", Ranking: "1 (2017-18)", League: "Lega Serie A"}
+	if err := clubinfo.Insert(newcl); err != nil {
+		log.Fatal("[FATAL] mgo - [Collection.Insert]: ", err)
+	}
 }
