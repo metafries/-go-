@@ -35,4 +35,21 @@ func main() {
 	ci := clubInfo{}
 	clubinfo.Find(bson.M{"id": 1}).One(&ci)
 	log.Println("[INFO] mgo - [Collection.Find]: Docs of club_info at id = 1 is", ci)
+
+	// Query with expression.
+	query := bson.M{
+		"id": bson.M{
+			"$gt": 0,
+		},
+		"league": bson.M{
+			"$in": []string{"Premier League", "Lega Serie A"},
+		},
+	}
+
+	var club Club
+	err = clubinfo.Find(query).All(&club)
+	if err != nil {
+		log.Fatal("[FATAL] mgo - [Query.All]: ", err)
+	}
+	log.Println("[INFO] mgo - [Query.All]: Query Results:", club)
 }
