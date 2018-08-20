@@ -29,12 +29,12 @@ func main() {
 
 	// Get the total number of documents in the collection.
 	n, _ := clubinfo.Count()
-	log.Println("[INFO] mgo - [Collection.Count]: Number of docs of club_info is", n)
+	log.Println("[INFO] mgo - [Collection.Count]: Number of docs of club_info:", n)
 
 	// Perform simple query.
 	ci := clubInfo{}
 	clubinfo.Find(bson.M{"id": 1}).One(&ci)
-	log.Println("[INFO] mgo - [Collection.Find]: Docs of club_info at id = 1 is", ci)
+	log.Println("[INFO] mgo - [Collection.Find.One]: Docs of club_info at id = 1:", ci)
 
 	// Query with expression.
 	query := bson.M{
@@ -49,7 +49,18 @@ func main() {
 	var club Club
 	err = clubinfo.Find(query).All(&club)
 	if err != nil {
-		log.Fatal("[FATAL] mgo - [Query.All]: ", err)
+		log.Fatal("[FATAL] mgo - [Collection.Find.All]: ", err)
 	}
-	log.Println("[INFO] mgo - [Query.All]: Query Results:", club)
+	log.Println("[INFO] mgo - [Collection.Find.All]: Query Results:", club)
+
+	// Use select to get names only
+	names := []struct {
+		Name string `bson:"name"`
+	}{}
+
+	err = clubinfo.Find(query).Select(bson.M{"name": 1}).All(&names)
+	if err != nil {
+		log.Fatal("[FATAL] mgo - [Collection.Find.Select.All]: ", err)
+	}
+	log.Println("[INFO] mgo - [Collection.Find.Select.All]: Query Results(names):", names)
 }
