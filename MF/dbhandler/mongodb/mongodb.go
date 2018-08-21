@@ -36,6 +36,20 @@ func main() {
 	clubinfo.Find(bson.M{"id": 1}).One(&ci)
 	log.Println("[INFO] mgo - [Collection.Find.One]: Docs of club_info at id = 1:", ci)
 
+	// Insert
+	newcl := clubInfo{ID: 3, Name: "Tottenham Hotspur", Ranking: "3", League: "Premier League"}
+	if err := clubinfo.Insert(newcl); err != nil {
+		log.Fatal("[FATAL] mgo - [Collection.Insert]: ", err)
+	}
+	log.Println("[INFO] mgo - [Collection.Insert]: <<<< SUCCESSFULLY INSERTED >>>>")
+
+	// Update
+	err = clubinfo.Update(bson.M{"id": 2}, bson.M{"$set": bson.M{"ranking(2017-2018)": "1"}})
+	if err != nil {
+		log.Fatal("[FATAL] mgo - [Collection.Update]: ", err)
+	}
+	log.Println("[INFO] mgo - [Collection.Update]: <<<< SUCCESSFULLY UPDATED >>>>")
+
 	// Query with expression.
 	query := bson.M{
 		"id": bson.M{
@@ -63,10 +77,4 @@ func main() {
 		log.Fatal("[FATAL] mgo - [Collection.Find.Select.All]: ", err)
 	}
 	log.Println("[INFO] mgo - [Collection.Find.Select.All]: Query Results(names):", names)
-
-	// Insert
-	newcl := clubInfo{ID: 2, Name: "Juventus", Ranking: "1 (2017-18)", League: "Lega Serie A"}
-	if err := clubinfo.Insert(newcl); err != nil {
-		log.Fatal("[FATAL] mgo - [Collection.Insert]: ", err)
-	}
 }
