@@ -36,12 +36,12 @@ func main() {
 	clubinfo.Find(bson.M{"id": 1}).One(&ci)
 	log.Println("[INFO] mgo - [Collection.Find.One]: Docs of club_info at id = 1:", ci)
 
-	// Insert
-	newcl := clubInfo{ID: 3, Name: "Tottenham Hotspur", Ranking: "3", League: "Premier League"}
-	if err := clubinfo.Insert(newcl); err != nil {
-		log.Fatal("[FATAL] mgo - [Collection.Insert]: ", err)
-	}
-	log.Println("[INFO] mgo - [Collection.Insert]: <<<< SUCCESSFULLY INSERTED >>>>")
+	// // Insert
+	// newcl := clubInfo{ID: 3, Name: "Tottenham Hotspur", Ranking: "3", League: "Premier League"}
+	// if err := clubinfo.Insert(newcl); err != nil {
+	// 	log.Fatal("[FATAL] mgo - [Collection.Insert]: ", err)
+	// }
+	// log.Println("[INFO] mgo - [Collection.Insert]: <<<< SUCCESSFULLY INSERTED >>>>")
 
 	// Update
 	err = clubinfo.Update(bson.M{"id": 2}, bson.M{"$set": bson.M{"ranking(2017-2018)": "1"}})
@@ -49,6 +49,12 @@ func main() {
 		log.Fatal("[FATAL] mgo - [Collection.Update]: ", err)
 	}
 	log.Println("[INFO] mgo - [Collection.Update]: <<<< SUCCESSFULLY UPDATED >>>>")
+
+	// // Remove
+	// if err := clubinfo.Remove(bson.M{"id": 3}); err != nil {
+	// 	log.Fatal("[FATAL] mgo - [Collection.Remove]: ", err)
+	// }
+	// log.Println("[INFO] mgo - [Collection.Remove]: <<<< SUCCESSFULLY REMOVED >>>>")
 
 	// Query with expression.
 	query := bson.M{
