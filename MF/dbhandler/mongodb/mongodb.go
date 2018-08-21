@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"sync"
 
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
@@ -83,4 +84,28 @@ func main() {
 		log.Fatal("[FATAL] mgo - [Collection.Find.Select.All]: ", err)
 	}
 	log.Println("[INFO] mgo - [Collection.Find.Select.All]: Query Results(names):", names)
+
+	// Concurrent access
+	var wg sync.WaitGroup
+	count, _ := clubinfo.Count()
+	wg.Add(count)
+	for i := 1; i <= count; i++ {
+		go readId(i, session.Copy(), &wg)
+	}
+	wg.Wait()
+}
+
+func readId(id int, sessionCopy *mgo.Session, wg *sync.WaitGroup) {
+	defer func() {
+		sessionCopy.Close()
+		wg.Done()
+	}()
+	p := sessionCopy.DB("MF").C("club_info")
+	ci := clubInfo{}
+	err := p.Find(bson.M{"id": id}).One(&ci)
+	if err != nil {
+		log.Printf("[ERROR] * - [readId]: Could not retrieve id %d, error %s\n", id, err.Error())
+		return
+	}
+	log.Println("[INFO] * - [readId]: Docs of club_info at id =", id, "=>", ci)
 }
