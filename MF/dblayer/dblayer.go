@@ -22,6 +22,7 @@ type ClubInfo struct {
 	ID      int    `json:"id" bson:"id"`
 	Name    string `json:"name" bson:"name"`
 	Ranking string `json:"ranking" bson:"ranking(2017-2018)"`
+	Stadium string `json:"stadium" bson:"stadium"`
 	League  string `json:"league" bson:"league"`
 }
 

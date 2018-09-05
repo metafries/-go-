@@ -21,14 +21,14 @@ func NewMySQLDataStore(conn string) (*mySQLDataStore, error) {
 func (msql *mySQLDataStore) AddClub(ci *ClubInfo) error {
 	_, err := msql.Exec(
 		"INSERT INTO Club (name, ranking, league) VALUES (?, ?, ?)",
-		ci.name, ci.ranking, ci.league)
+		ci.Name, ci.Ranking, ci.League)
 	return err
 }
 
 func (msql *mySQLDataStore) FindClub(id int) (ClubInfo, error) {
 	row := msql.QueryRow("SELECT * FROM Club WHERE id = ?", id)
 	ci := ClubInfo{}
-	err := row.Scan(&ci.id, &ci.name, &ci.ranking, &ci.stadium, &ci.league)
+	err := row.Scan(&ci.ID, &ci.Name, &ci.Ranking, &ci.Stadium, &ci.League)
 	return ci, err
 }
 
@@ -41,10 +41,10 @@ func (msql *mySQLDataStore) AllClubs() (club, error) {
 
 	clubs := club{}
 	for rows.Next() {
-		club := ClubInfo{}
-		err := row.Scan(&ci.id, &ci.name, &ci.ranking, &ci.stadium, &ci.league)
+		ci := ClubInfo{}
+		err := rows.Scan(&ci.ID, &ci.Name, &ci.Ranking, &ci.Stadium, &ci.League)
 		if err == nil {
-			clubs = append(clubs, club)
+			clubs = append(clubs, ci)
 		}
 	}
 
