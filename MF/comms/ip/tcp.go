@@ -9,6 +9,7 @@ import (
 	"net"
 	"os"
 	"strings"
+	"time"
 )
 
 func main() {
@@ -51,4 +52,43 @@ func runClient(address string) error {
 		fmt.Println(string(buffer))
 	}
 	return scanner.Err()
+}
+
+func runServer(address string) error {
+	l, err := net.Listen("tcp", address)
+	if err != nil {
+		return err
+	}
+	log.Println("Listening..... ")
+	defer l.Close()
+
+	for {
+		c, err := l.Accept()
+		if err != nil {
+			return err
+		}
+		go handleConnection(c)
+	}
+}
+
+func handleConnection(c net.Conn) {
+	defer c.Close()
+	reader := bufio.NewReader(c)
+	writer := bufio.NewWriter(c)
+	for {
+		// buffer := make([]byte, 1024)
+		c.SetDeadline(time.Now().Add(5 * time.Second))
+		line, err := reader.ReadString('\r')
+		// _, err := c.Read(buffer)
+		if err != nil && err != io.EOF {
+			log.Println(err)
+			return
+		} else if err == io.EOF {
+			log.Println("Connection closed")
+			return
+		}
+		fmt.Printf("Received %s from address %s \n", line[:len(line)-1], c.RemoteAddr())
+		writer.WriteString("Message received... ")
+		writer.Flush()
+	}
 }
