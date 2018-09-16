@@ -1,0 +1,16 @@
+syntax = "proto3";
+package mfproto;
+
+message Club{
+    string clubname = 1;
+    string LeagueName = 2;
+
+    message ClubInfo{
+        int32 id = 1;
+        string name = 2;
+        string ranking = 3;
+        string league = 4;
+    }
+
+    repeated ClubInfo CI = 3;
+}
