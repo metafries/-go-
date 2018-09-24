@@ -21,7 +21,7 @@ func (mfcreq *MFClubReqHandler) connect(o, conn string) error {
 	if err != nil {
 		return err
 	}
-	mfcreq.dbconn = dblayer
+	mfcreq.dbconn = dbl
 	return nil
 }
 
