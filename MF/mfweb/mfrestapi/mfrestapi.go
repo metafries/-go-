@@ -13,7 +13,7 @@ type DBlayerconfig struct {
 
 func IntializeAPIHandlers() error {
 	conf := new(DBlayerconfig)
-	err := _mfConfig.GetConfiguration(_mfConfig.JSON, conf, "../../apiconfig.json")
+	err := _mfConfig.GetConfiguration(_mfConfig.JSON, conf, "./mfweb/apiconfig.json")
 	if err != nil {
 		log.Println("ERROR: decoding JSON: ", err)
 		return err
