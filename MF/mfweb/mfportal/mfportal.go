@@ -13,17 +13,19 @@ var mfWebTemplate *template.Template
 
 func Run() error {
 	var err error
-	mfWebTemplate, err = template.ParseFiles(
-		"./mfweb/mfportal/cover/Club/club.html",
-		"./mfweb/mfportal/cover/about/about.html")
-	if err != nil {
-		return err
-	}
+
 	conf := struct {
-		Filespath string `json:"filespath"`
+		Filespath string   `json:"filespath"`
+		Templates []string `json:"templates"`
 	}{}
 	err = _mfConfig.GetConfiguration(_mfConfig.JSON, &conf, "./mfweb/portalconfig.json")
 	if err != nil {
+		return err
+	}
+
+	mfWebTemplate, err = template.ParseFiles(conf.Templates...)
+	if err != nil {
+		log.Println(err)
 		return err
 	}
 
@@ -33,6 +35,7 @@ func Run() error {
 	http.Handle("/", fs)
 	http.HandleFunc("/Club/", clubhandler)
 	http.HandleFunc("/about/", abouthandler)
+	http.HandleFunc("/chat/", chathandler)
 	return http.ListenAndServe(":8061", nil)
 }
 
