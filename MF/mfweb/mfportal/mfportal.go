@@ -122,10 +122,10 @@ func chathandler(w http.ResponseWriter, r *http.Request) {
 			pass = v[0]
 		}
 
-		// if !verifyPassword(user, pass) {
-		// 	mfWebTemplate.ExecuteTemplate(w, "login.html", nil)
-		// 	return
-		// }
+		if !verifyPassword(user, pass) {
+			mfWebTemplate.ExecuteTemplate(w, "login.html", nil)
+			return
+		}
 		ns.Name = user
 		if _, ok := r.Form["rememberme"]; ok {
 			cookie := http.Cookie{
@@ -165,4 +165,8 @@ func abouthandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println(err)
 	}
+}
+
+func verifyPassword(username, password string) bool {
+	return true
 }
