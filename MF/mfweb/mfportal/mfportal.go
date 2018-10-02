@@ -39,6 +39,47 @@ func Run() error {
 	return http.ListenAndServe(":8061", nil)
 }
 
+func chathandler(w http.ResponseWriter, r *http.Request) {
+	ns := struct {
+		Name string
+	}{}
+	r.ParseForm()
+	if len(r.Form) == 0 {
+		if cookie, err := r.Cookie("username"); err != nil {
+			mfWebTemplate.ExecuteTemplate(w, "login.html", nil)
+			return
+		} else {
+			ns.Name = cookie.Value
+			mfWebTemplate.ExecuteTemplate(w, "chat.html", ns)
+			return
+		}
+	}
+
+	if r.Method == "POST" {
+		var user, pass string
+		if v, ok := r.Form["username"]; ok && len(v) > 0 {
+			user = v[0]
+		}
+		if v, ok := r.Form["password"]; ok && len(v) > 0 {
+			pass = v[0]
+		}
+
+		// if !verifyPassword(user, pass) {
+		// 	mfWebTemplate.ExecuteTemplate(w, "login.html", nil)
+		// 	return
+		// }
+		ns.Name = user
+		if _, ok := r.Form["rememberme"]; ok {
+			cookie := http.Cookie{
+				Name:  "username",
+				Value: user,
+			}
+			http.SetCookie(w, &cookie)
+		}
+	}
+	mfWebTemplate.ExecuteTemplate(w, "chat.html", ns)
+}
+
 func clubhandler(w http.ResponseWriter, r *http.Request) {
 	dbl, err := dblayer.ConnectDatabase("mysql", "root:KLin#180812@/MF")
 	if err != nil {
