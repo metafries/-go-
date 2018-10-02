@@ -17,9 +17,9 @@ $(function() {
         alert("Error: Your browser does not support web sockets.");
     } else {
         if (window.location.protocol == "https:") {
-            socket = new WebSocket("wss://localhost:8062/ChatRoom/");
+            socket = new WebSocket("wss://localhost:8062/chatRoom/");
         } else {
-            socket = new WebSocket("wss://localhost:8061/ChatRoom/");        
+            socket = new WebSocket("ws://localhost:8061/chatRoom/");        
         }
         socket.onclose = function() {
             alert("Connection has been closed.");
