@@ -46,7 +46,12 @@ func Run() error {
 	http.HandleFunc("/about/", abouthandler)
 	http.HandleFunc("/chat/", chathandler)
 	http.Handle("/chatRoom/", websocket.Handler(chatWS))
-	return http.ListenAndServe(":8061", nil)
+	go func() {
+		err = http.ListenAndServeTLS(":8062", "cert.pem", "key.pem", nil)
+		log.Println(err)
+	}()
+	err = http.ListenAndServe(":8061", nil)
+	return err
 }
 
 func chatWS(ws *websocket.Conn) {
