@@ -20,14 +20,14 @@ func AddBytesToVault(db *bolt.DB, username string, password []byte) error {
 	if db == nil {
 		return ErrNilDB
 	}
-	return db.Update(func(tx *bolt.Tx)) error {
-		b, err := tx.CreateBucketIfNotExixts([]byte("PasswordVault"))
+	return db.Update(func(tx *bolt.Tx) error {
+		b, err := tx.CreateBucketIfNotExists([]byte("PasswordVault"))
 		if err != nil {
-			return err 
+			return err
 		}
 		err = b.Put([]byte(username), password)
-		return err 
-	}
+		return err
+	})
 }
 
 func GetPassword(db *bolt.DB, username string) (string, error) {
@@ -35,14 +35,14 @@ func GetPassword(db *bolt.DB, username string) (string, error) {
 		return "", ErrNilDB
 	}
 	password := ""
-	err := db.View(func(tx *bolt.Tx)) error {
+	err := db.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte("PasswordVault"))
-		v := b.Get([byte(username)])		
+		v := b.Get([]byte(username))
 		password = string(v)
 		return nil
-	}
+	})
 
-	return password, err 	
+	return password, err
 }
 
 func GetPasswordBytes(db *bolt.DB, username string) ([]byte, error) {
@@ -50,14 +50,13 @@ func GetPasswordBytes(db *bolt.DB, username string) ([]byte, error) {
 		return nil, ErrNilDB
 	}
 	password := []byte{}
-	err := db.View(func(tx *bolt.Tx)) error {
+	err := db.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte("PasswordVault"))
 		if b == nil {
 			return errors.New("Could not find PasswordVault bucket!")
 		}
 		password = b.Get([]byte(username))
 		return nil
-	}
-
-	return password, err 
+	})
+	return password, err
 }
