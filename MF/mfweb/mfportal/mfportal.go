@@ -5,6 +5,8 @@ import (
 	"-go-/MF/mfweb/mfrestapi"
 	"-go-/_mfConfig"
 	"bufio"
+	"bytes"
+	"crypto/md5"
 	"html/template"
 	"log"
 	"net"
@@ -173,5 +175,15 @@ func abouthandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func verifyPassword(username, password string) bool {
-	return true
+	db, err := passwordvault.ConnectPasswordVault()
+	if err != nil {
+		return false
+	}
+	defer db.Close()
+	data, err := passwordvault.GetPasswordBytes(db, username)
+	if err != nil {
+		return false
+	}
+	hashedPass := md5.Sum([]byte(password))
+	return bytes.Equal(hashedPass[:], data)
 }
