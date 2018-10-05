@@ -11,6 +11,8 @@ import (
 func main() {
 	logger := _mfLogger.GetInstance()
 	logger.Println("Starting MF Web Service ...")
+	// -o w => MF is running as a web server
+	// -o c => MF will run as a TCP chat server
 	operation := flag.String("o", "w", "Operation: w for web \n c for chat")
 	flag.Parse()
 	switch strings.ToLower(*operation) {
