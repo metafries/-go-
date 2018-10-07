@@ -3,5 +3,8 @@
     "templates":["./mfweb/mfportal/cover/Club/club.html",
                  "./mfweb/mfportal/cover/about/about.html",
                  "./mfweb/mfportal/cover/Chat/chat.html",
-                 "./mfweb/mfportal/cover/Chat/login.html"]
+                 "./mfweb/mfportal/cover/Chat/login.html",
+                 "./mfweb/mfportal/cover/Common/signin-header.tmpl",
+                 "./mfweb/mfportal/cover/Common/cover-header.tmpl",                 
+                 "./mfweb/mfportal/cover/Common/footer.tmpl"]
 }
